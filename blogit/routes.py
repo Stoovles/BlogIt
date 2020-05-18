@@ -1,5 +1,5 @@
 from flask import render_template, url_for, flash, redirect, request
-from blogit.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from blogit.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from blogit import app, bcrypt, db
 from blogit.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
@@ -112,3 +112,12 @@ def account():
                            title='Account',
                            image_file=image_file,
                            form=form)
+
+@app.route('/post/new', methods=['GET', 'POST'])
+@login_required
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        flash('Post Created', 'success')
+        return redirect(url_for('home'))
+    return render_template('create_post.html', title='New Post', form=form)
