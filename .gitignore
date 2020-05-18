@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 
 # Database
+blogit/test.db
 test.db
