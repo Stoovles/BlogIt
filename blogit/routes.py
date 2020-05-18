@@ -13,13 +13,13 @@ def default():
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    posts = Post.query.all()
+    return render_template('home.html', posts=posts)
 
 
 @app.route('/about')
 def about():
-    return render_template('about.html',
-                           title='About')
+    return render_template('about.html', title='About')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -32,9 +32,7 @@ def register():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
 
         #create user
-        user = User(username=form.username.data,
-                    email=form.email.data,
-                    password=hashed_password)
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
 
         #add user to database
         db.session.add(user)
@@ -42,9 +40,7 @@ def register():
 
         flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('login'))
-    return render_template('register.html',
-                           title='Register',
-                           form=form)
+    return render_template('register.html', title='Register', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -58,15 +54,12 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         #authenticate user
         if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user,
-                       remember=form.remember.data)
+            login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('Login Unsuccessful. Check email and/or password.', 'danger')
-    return render_template('login.html',
-                           title='Login',
-                           form=form)
+    return render_template('login.html', title='Login', form=form)
 
 
 @app.route('/logout')
@@ -106,19 +99,17 @@ def account():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-    image_file = url_for('static',
-                         filename='profile_pictures/' + current_user.image_file)
-    return render_template('account.html',
-                           title='Account',
-                           image_file=image_file,
-                           form=form)
+    image_file = url_for('static', filename='profile_pictures/' + current_user.image_file)
+    return render_template('account.html', title='Account', image_file=image_file, form=form)
 
 @app.route('/post/new', methods=['GET', 'POST'])
 @login_required
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
+        #Create new post object
         post = Post(title=form.title.data, content=form.content.data, user=current_user)
+        #Add post to database
         db.session.add(post)
         db.session.commit()
         flash('Post Created', 'success')
