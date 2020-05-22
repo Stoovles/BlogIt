@@ -2,7 +2,8 @@ import unittest
 from blogit.models import User, Post
 from blogit import create_test_app, db
 
-class appDBTests(unittest.TestCase):
+
+class appTests(unittest.TestCase):
 
     def create_app(self):
         return create_test_app()
@@ -12,13 +13,11 @@ class appDBTests(unittest.TestCase):
         with self.create_app().app_context():
             db.create_all()
 
-
     def tearDown(self):
         # Ensures that the database is emptied for next unit test
         with self.create_app().app_context():
             db.session.remove()
             db.drop_all()
-
 
     def test_user_creation(self):
         user = User(username='Bob', email='t@t.com', password='password')
