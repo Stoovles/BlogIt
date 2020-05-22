@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
+from flask_migrate import Migrate
 import os
 
 db = SQLAlchemy()
@@ -90,7 +91,7 @@ def create_development_app(test_config=None):
         # a default secret that should be overridden by instance config
         SECRET_KEY=os.urandom(16),
         # store the database in the instance folder
-        SQLALCHEMY_DATABASE_URI='sqlite:///development.db?check_same_thread=False',
+        SQLALCHEMY_DATABASE_URI=os.environ['DATABASE_URL'],
     )
     app.app_context().push()  # this does the binding
 
@@ -117,6 +118,7 @@ def create_development_app(test_config=None):
     login_manager.login_view = 'login'
     login_manager.login_message_category = 'info'
     bcrypt.init_app(app)
+    migrate = Migrate(app, db)
 
     # apply the blueprints to the app
     from blogit import routes
