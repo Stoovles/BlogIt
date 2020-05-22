@@ -1,4 +1,4 @@
-from blogit import app
+from blogit import create_development_app
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    create_development_app().run(debug=True)
