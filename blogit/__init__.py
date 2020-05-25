@@ -91,7 +91,7 @@ def create_development_app(test_config=None):
         # a default secret that should be overridden by instance config
         SECRET_KEY=os.urandom(16),
         # store the database in the instance folder
-        SQLALCHEMY_DATABASE_URI='postgresql://postgres:loveshack310@localhost/blogit',
+        SQLALCHEMY_DATABASE_URI='postgres://meiadzikougoxp:63caa9d0a61d0064905a33e77dd535e704e00feae98a2b52a3941175c171d0c1@ec2-52-7-39-178.compute-1.amazonaws.com:5432/d1ratpbl9cvqhj',
     )
     app.app_context().push()  # this does the binding
 
