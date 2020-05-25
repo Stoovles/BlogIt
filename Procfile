@@ -1,1 +1,1 @@
-web: gunicorn "blogit:create_development_app()" --preload
+web: gunicorn wsgi:app --preload
