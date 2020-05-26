@@ -49,10 +49,7 @@ def create_test_app(test_config=None):
     app.register_blueprint(routes.bp)
 
     # make url_for('index') == url_for('blog.index')
-    # in another app, you might define a separate main index here with
-    # app.route, while giving the blog blueprint a url_prefix, but for
-    # the tutorial the blog will be the main index
-    # app.add_url_rule("/", endpoint="index")
+    app.add_url_rule("/", endpoint="index")
 
     return app
 
@@ -94,9 +91,6 @@ def create_development_app(test_config=None):
     app.register_blueprint(routes.bp)
 
     # make url_for('index') == url_for('blog.index')
-    # in another app, you might define a separate main index here with
-    # app.route, while giving the blog blueprint a url_prefix, but for
-    # the tutorial the blog will be the main index
     app.add_url_rule("/", endpoint="index")
 
     return app
