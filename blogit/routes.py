@@ -8,6 +8,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 import secrets
 import os
 from PIL import Image
+from decouple import config
 
 bp = Blueprint("main", __name__)
 
@@ -20,7 +21,7 @@ def load_user(user_id):
 
 @bp.route('/')
 def default():
-    return "Root Page"
+    return config('URL_DATABASE')
 
 
 @bp.route('/home')
