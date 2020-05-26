@@ -1,5 +1,7 @@
 # BlogIt
 
+Simple blogger application. Inspiration: Reddit. 
+
 ## Deployed with Heroku
 https://protected-earth-03499.herokuapp.com/
 
