@@ -20,7 +20,8 @@ def load_user(user_id):
 
 @bp.route('/')
 def default():
-    return os.getenv('URL_DATABASE')
+    posts = Post.query.all()
+    return render_template('home.html', posts=posts)
 
 
 @bp.route('/home')
