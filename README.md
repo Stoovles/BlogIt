@@ -1,6 +1,6 @@
 # BlogIt
 
-Simple blogger application. Inspiration: Reddit. Main goal is to gain some experience working with the Flask framework.
+Simple blogger application. Inspiration: Reddit. Main goal is to gain experience working with the Flask framework.
 
 ## Deployed with Heroku
 https://protected-earth-03499.herokuapp.com/
