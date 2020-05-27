@@ -31,5 +31,9 @@ I also focused on implementing common Flask design patterns including an applica
 `` python run_dev.py ``
 
 ## Testing
+Cursory testing with unittest. Refer to issues.
+Run this in your command line:
 
- Cursory testing with unittest. Refer to issues.
+``python -m unittest discover tests``
+
+
