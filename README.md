@@ -32,6 +32,7 @@ I also focused on implementing common Flask design patterns including an applica
 
 ## Testing
 Cursory testing with unittest. Refer to issues.
+
 Run this in your command line:
 
 ``python -m unittest discover tests``
